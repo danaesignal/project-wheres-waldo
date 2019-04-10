@@ -1,4 +1,5 @@
-import { Model, Schema } from 'mongoose';
+import mongoose from 'mongoose';
+const Schema = mongoose.Schema;
 
 let TargetSchema = new Schema({
   name: {type: String, required: true, max: 100},
@@ -8,4 +9,4 @@ let TargetSchema = new Schema({
   bottomRight: {type: Number, required: true},
 });
 
-export default Model('Target', TargetSchema);
+export default mongoose.model('Target', TargetSchema);
