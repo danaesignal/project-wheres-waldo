@@ -1,8 +1,9 @@
 import express from 'express';
-import Score from './routes/score.route';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
+import Score from './routes/score.route';
+import Target from './routes/target.route';
 
 const app = express();
 dotenv.config();
@@ -23,6 +24,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/score', Score);
+app.use('/target', Target);
 
 app.listen(4500)
 
