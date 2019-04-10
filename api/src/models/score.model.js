@@ -1,9 +1,9 @@
-import { Model, Schema } from 'mongoose';
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 let ScoreSchema = new Schema({
-  id: {type: String, required: true, max: 100},
   name: {type: String, required: true, max: 100},
   time: {type: Number, required: true}
 });
 
-export default Model('Score', ScoreSchema);
+module.exports = mongoose.model('Score', ScoreSchema);
