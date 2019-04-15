@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
+// This information will all be supplied manually; model is non-interactive to
+// users.
 let TargetSchema = new Schema({
   name: {type: String, required: true, max: 100},
   topLeft: {type: Number, required: true},
