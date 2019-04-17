@@ -4,6 +4,7 @@
 
 import React, { PureComponent } from 'react';
 import TMNT from '../../Assets/Images/tmnt.jpg';
+import classes from './Photo.module.scss';
 
 class Photo extends PureComponent{
   state = {
@@ -12,8 +13,13 @@ class Photo extends PureComponent{
 
   render(){
     return (
-      <div>
-        <img src={TMNT} alt="Teenage Mutant Ninja Turtles"/>
+      <div id="Photo">
+        <img
+          src={TMNT}
+          alt="Teenage Mutant Ninja Turtles"
+          onClick={this.props.click}
+          className={classes.Photo}
+        />
       </div>
     );
   }

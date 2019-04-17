@@ -13,12 +13,19 @@ class PhotoTagger extends PureComponent{
 
   };
 
+  eventReporter = (e) => {
+    let image = document.querySelector('#Photo');
+    console.log((e.clientY + window.scrollY)/image.clientHeight);
+  }
+
   render(){
     return (
       <div>
         <Modal/>
         <Header/>
-        <Photo/>
+        <Photo
+          click={this.eventReporter}
+        />
       </div>
     );
   }
