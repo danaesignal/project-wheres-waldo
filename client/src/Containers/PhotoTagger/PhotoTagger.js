@@ -4,6 +4,9 @@
 // Won't: display anything on its own
 
 import React, { PureComponent } from 'react';
+import Modal from '../../HOC/Modal/Modal';
+import Header from '../../Components/Header/Header';
+import Photo from '../../Components/Photo/Photo';
 
 class PhotoTagger extends PureComponent{
   state = {
@@ -13,7 +16,9 @@ class PhotoTagger extends PureComponent{
   render(){
     return (
       <div>
-        Okay.
+        <Modal/>
+        <Header/>
+        <Photo/>
       </div>
     );
   }
