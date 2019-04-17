@@ -3,6 +3,7 @@
 // with the application.
 
 import React, { PureComponent } from 'react';
+import TMNT from '../../Assets/Images/tmnt.jpg';
 
 class Photo extends PureComponent{
   state = {
@@ -12,7 +13,7 @@ class Photo extends PureComponent{
   render(){
     return (
       <div>
-
+        <img src={TMNT} alt="Teenage Mutant Ninja Turtles"/>
       </div>
     );
   }
