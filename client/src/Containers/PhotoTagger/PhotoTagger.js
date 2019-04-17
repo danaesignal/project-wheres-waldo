@@ -3,3 +3,20 @@
 // lower components to use
 // Won't: display anything on its own
 
+import React, { PureComponent } from 'react';
+
+class PhotoTagger extends PureComponent{
+  state = {
+
+  };
+
+  render(){
+    return (
+      <div>
+        Okay.
+      </div>
+    );
+  }
+}
+
+export default PhotoTagger;
