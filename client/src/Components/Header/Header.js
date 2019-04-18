@@ -3,16 +3,16 @@
 // who yet remains to be (differentiated by name color)
 
 import React, { PureComponent } from 'react';
+import classes from './Header.module.scss';
+import NameBar from './NameBar/NameBar';
+import ScoreButton from './ScoreButton/ScoreButton';
 
 class Header extends PureComponent{
-  state = {
-
-  };
-
   render(){
     return (
-      <div>
-
+      <div className={classes.Header}>
+        <NameBar/>
+        <ScoreButton/>
       </div>
     );
   }
