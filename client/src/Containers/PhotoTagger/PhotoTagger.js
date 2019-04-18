@@ -14,9 +14,20 @@ class PhotoTagger extends PureComponent{
 
   };
 
-  eventReporter = (e) => {
-    let image = document.querySelector('#Photo');
-    console.log((e.clientX + window.scrollX)/image.clientWidth, (e.clientY + window.scrollY)/image.clientHeight);
+  eventReporter = async (e) => {
+    const image = document.querySelector('#Photo');
+    const imageHeight = image.clientHeight;
+    const imageWidth = image.clientWidth;
+    const mouseXPosition = (e.clientX + window.scrollX);
+    const mouseYPosition = (e.clientY + window.scrollY);
+    const percentageXPosition = mouseXPosition / imageWidth;
+    const percentageYPosition = mouseYPosition / imageHeight;
+
+    const response = await fetch('http://localhost:4500/target/Leonardo');
+    const json = await response.json();
+
+    console.log(json.name);
+
   }
 
   render(){
