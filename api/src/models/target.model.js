@@ -5,10 +5,10 @@ const Schema = mongoose.Schema;
 // users.
 let TargetSchema = new Schema({
   name: {type: String, required: true, max: 100},
-  topLeft: {type: Number, required: true},
-  topRight: {type: Number, required: true},
-  bottomLeft: {type: Number, required: true},
-  bottomRight: {type: Number, required: true},
+  topLeft: {type: Array, required: true},
+  topRight: {type: Array, required: true},
+  bottomLeft: {type: Array, required: true},
+  bottomRight: {type: Array, required: true},
 });
 
 export default mongoose.model('Target', TargetSchema);
