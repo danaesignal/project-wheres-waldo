@@ -2,6 +2,7 @@
 // which people have been correctly tagged
 import React, { PureComponent } from 'react';
 import classes from './NameBar.module.scss';
+import Name from './Name/Name';
 
 class NameBar extends PureComponent{
   state = {
@@ -11,18 +12,26 @@ class NameBar extends PureComponent{
   render(){
     return (
       <div className={classes.NameBar}>
-        <div className={classes.Name}>
-          <span>Leonardo</span>
-        </div>
-        <div className={classes.Name}>
-          <span>Donatello</span>
-        </div>
-        <div className={classes.Name}>
-          <span>Michaelangelo</span>
-        </div>
-        <div className={classes.Name}>
-        <span>Raphael</span>
-        </div>
+        <Name
+          content="Leonardo"
+          click={this.props.click}
+          active={this.props.userSelection === "Leonardo"}
+        />
+        <Name
+          content="Donatello"
+          click={this.props.click}
+          active={this.props.userSelection === "Donatello"}
+        />
+        <Name
+          content="Michaelangelo"
+          click={this.props.click}
+          active={this.props.userSelection === "Michaelangelo"}
+        />
+        <Name
+          content="Raphael"
+          click={this.props.click}
+          active={this.props.userSelection === "Raphael"}
+        />
       </div>
     );
   }

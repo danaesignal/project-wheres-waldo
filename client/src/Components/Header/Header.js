@@ -11,7 +11,9 @@ class Header extends PureComponent{
   render(){
     return (
       <div className={classes.Header}>
-        <NameBar/>
+        <NameBar
+          click={this.props.nameClick}
+          userSelection={this.props.userSelection}/>
         <ScoreButton/>
       </div>
     );

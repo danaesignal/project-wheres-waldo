@@ -1,0 +1,10 @@
+.Name {
+  padding-left: 10px;
+  padding-right: 10px;
+  span {
+    cursor: pointer;
+  }
+  span.active{
+    color:gold;
+  }
+}

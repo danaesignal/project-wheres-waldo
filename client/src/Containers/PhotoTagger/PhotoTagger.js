@@ -43,8 +43,9 @@ class PhotoTagger extends PureComponent{
     return (insideXBounds && insideYBounds);
   };
 
-  menuClickHandler = (e) => {
-    
+  menuClickHandler = (turtle) => {
+    if(this.state.scoreCard[turtle]) return;
+    this.setState({'userSelection': turtle});
   };
 
   photoClickHandler = (e) => {
@@ -55,25 +56,26 @@ class PhotoTagger extends PureComponent{
         scoreCard[this.state.userSelection] = true;
       }
     }
-    this.setState({'scoreCard': scoreCard});
-    this.wonGameDetector();
+    this.wonGameDetector(scoreCard);
   };
 
-  wonGameDetector = () => {
-    const scoreCard = {...this.state.scoreCard};
+  wonGameDetector = (scoreCard) => {
+    console.log(Object.keys(scoreCard));
     if(Object.keys(scoreCard).length > 3){
       // If there are four distinct records, they won. Record their time.
       scoreCard.time = Moment().diff(this.state.startTime, 'seconds');
-      this.setState({'scoreCard': scoreCard});
       // Open the modal to allow them to enter their name.
     }
+    this.setState({'scoreCard': scoreCard});
   };
 
   render(){
     return (
       <div className={classes.PhotoTagger}>
         <Modal/>
-        <Header/>
+        <Header
+          nameClick={this.menuClickHandler}
+          userSelection={this.state.userSelection}/>
         <Photo
           click={this.photoClickHandler}
         />
