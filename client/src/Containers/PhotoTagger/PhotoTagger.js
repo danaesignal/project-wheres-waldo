@@ -9,6 +9,7 @@ import Moment from 'moment';
 import Modal from '../../HOC/Modal/Modal';
 import Header from '../../Components/Header/Header';
 import Photo from '../../Components/Photo/Photo';
+import ScoreBoard from '../../Components/ScoreBoard/ScoreBoard';
 
 class PhotoTagger extends PureComponent{
   state = {
@@ -19,14 +20,20 @@ class PhotoTagger extends PureComponent{
   };
 
   async componentDidMount(){
-    const response = await fetch(`http://localhost:4500/target/${this.state.userSelection}`);
-    const json = await response.json();
-    const turtleData = {...json[0]};
+    const turtleResponse = await fetch(`http://localhost:4500/target/${this.state.userSelection}`);
+    const turtleJson = await turtleResponse.json();
+    const turtleData = {...turtleJson[0]};
+
+    const scoreResponse = await fetch(`http://localhost:4500/score/`);
+    const scoreJson = await scoreResponse.json();
+    const scoreData = [...scoreJson];
+
     this.setState({'turtleData': turtleData});
+    this.setState({'highScores': scoreData});
     this.setState({'startTime': Moment()})
   }
 
-  positionChecker = async (e) => {
+  positionChecker = (e) => {
     const image = document.querySelector('#Photo');
     const imageHeight = image.clientHeight;
     const imageWidth = image.clientWidth;
@@ -45,9 +52,15 @@ class PhotoTagger extends PureComponent{
     return (insideXBounds && insideYBounds);
   };
 
-  menuClickHandler = (turtle) => {
+  menuClickHandler = async (turtle) => {
     if(this.state.scoreCard[turtle]) return;
-    this.setState({'userSelection': turtle});
+
+    const turtleResponse = await fetch(`http://localhost:4500/target/${turtle}`);
+    const turtleJson = await turtleResponse.json();
+    const turtleData = {...turtleJson[0]};
+
+    this.setState({'turtleData': turtleData});
+    this.setState({'userSelection': turtle})
   };
 
   photoClickHandler = (e) => {
@@ -86,7 +99,9 @@ class PhotoTagger extends PureComponent{
         <Modal
           showModal={this.state.showScoreModal}
           toggleModal={this.toggleScoreModal}>
-          <p>Score</p>
+          <ScoreBoard
+            scoreData={this.state.highScores}
+          />
         </Modal>
         {/* Game End Modal */}
         <Modal
