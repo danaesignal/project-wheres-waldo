@@ -13,8 +13,10 @@ class Header extends PureComponent{
       <div className={classes.Header}>
         <NameBar
           click={this.props.nameClick}
-          userSelection={this.props.userSelection}/>
-        <ScoreButton/>
+          userSelection={this.props.userSelection}
+          scoreCard={this.props.scoreCard}/>
+        <ScoreButton
+          click={this.props.toggleModal}/>
       </div>
     );
   }

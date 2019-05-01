@@ -7,7 +7,7 @@ class ScoreButton extends PureComponent{
   render(){
     return (
       <div className={classes.ScoreButton}>
-        Score
+        <span onClick={this.props.click}>Score</span>
       </div>
     );
   }

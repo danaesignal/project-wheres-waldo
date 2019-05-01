@@ -13,7 +13,9 @@ import Photo from '../../Components/Photo/Photo';
 class PhotoTagger extends PureComponent{
   state = {
     'userSelection': 'Leonardo',
-    'scoreCard': {}
+    'scoreCard': {},
+    'showScoreModal': false,
+    'showSubmissionModal': true
   };
 
   async componentDidMount(){
@@ -69,13 +71,36 @@ class PhotoTagger extends PureComponent{
     this.setState({'scoreCard': scoreCard});
   };
 
+  toggleScoreModal = () => {
+    this.setState({ showScoreModal: !this.state.showScoreModal })
+  }
+
+  toggleSubmissionModal = () => {
+    this.setState({ showSubmissionModal: !this.state.showSubmissionModal })
+  }
+
   render(){
     return (
       <div className={classes.PhotoTagger}>
-        <Modal/>
+        {/* Score Modal */}
+        <Modal
+          showModal={this.state.showScoreModal}
+          toggleModal={this.toggleScoreModal}>
+          <p>Score</p>
+        </Modal>
+        {/* Game End Modal */}
+        <Modal
+          onlyCloseWithX
+          showModal={this.state.showSubmissionModal}
+          toggleModal={this.toggleSubmissionModal}>
+          <p>You win!</p>
+        </Modal>
         <Header
           nameClick={this.menuClickHandler}
-          userSelection={this.state.userSelection}/>
+          userSelection={this.state.userSelection}
+          scoreCard={Object.keys(this.state.scoreCard)}
+          toggleModal={this.toggleScoreModal}
+        />
         <Photo
           click={this.photoClickHandler}
         />

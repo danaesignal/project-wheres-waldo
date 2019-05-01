@@ -5,6 +5,11 @@
     cursor: pointer;
   }
   span.active{
-    color:gold;
+    color: lighten(hsla(48, 60%, 69%, 1), 5%);
+  }
+
+  span.complete{
+    color: lighten(green, 5%);
+    cursor: default;
   }
 }
