@@ -1,8 +1,16 @@
 import React, { PureComponent } from 'react';
+import ScoreLine from './ScoreLine/ScoreLine';
 
 class ScoreBoard extends PureComponent{
   render(){
-    let output = [<p>test</p>,<p>test</p>,<p>test</p>,<p>test</p>]
+    let output = this.props.scoreData.map((score, index) => {
+      return (
+        <ScoreLine
+          score={score}
+          key={index}
+        />
+      );
+    });
 
     return (
       <div>
