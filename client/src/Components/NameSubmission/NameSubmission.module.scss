@@ -1,0 +1,29 @@
+.NameSubmission {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  div {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  form {
+    max-width: 300px;
+    margin: 0 auto;
+    margin-bottom: 5px;
+  }
+  label, input[type="text"] {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 5px;
+  }
+  .TopRow {
+    background-color: lighten(black, 10%);
+    color: white;
+    margin: 0;
+    padding-bottom: 5px;
+  }
+  .title {
+    text-decoration: underline;
+  }
+}
+

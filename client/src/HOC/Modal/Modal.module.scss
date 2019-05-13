@@ -17,7 +17,8 @@
 
 .modal {
   width: 500px;
-  // height: 600px;
+  max-height: 600px;
+  overflow-y: auto;
   background: #E3E3E3;
   border: 1px solid black;
 }

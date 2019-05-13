@@ -110,13 +110,14 @@ class PhotoTagger extends PureComponent{
   }
 
   handleNameSubmission = async () => {
-    return await fetch('http://localhost:4500/score/add', {
+    console.log('Yerp');
+    return await fetch(`http://localhost:4500/score/${this.state.scoreCard.id}`, {
       method: 'PATCH',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({_id: this.state.scoreCard.id, name: this.state.name})
+      body: JSON.stringify({name: this.state.name})
     });
   }
 

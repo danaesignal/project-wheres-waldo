@@ -8,7 +8,7 @@ class ScoreLine extends PureComponent{
   render(){
     return (
       <div>
-        {this.props.score.name}, {this.props.score.time} seconds.
+        {unescape(this.props.score.name)}, {this.props.score.time} seconds.
       </div>
     );
   }
