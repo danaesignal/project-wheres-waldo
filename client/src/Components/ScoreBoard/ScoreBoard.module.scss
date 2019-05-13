@@ -1,0 +1,27 @@
+.ScoreBoard {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  div {
+    width: 100%;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    background-color: lighten(black, 10%);
+    color: white;
+  }
+
+  div:nth-of-type(even) {
+    background-color: #E3E3E3;
+    color: black;
+  }
+
+  .title{
+    text-decoration: underline;
+  }
+
+}

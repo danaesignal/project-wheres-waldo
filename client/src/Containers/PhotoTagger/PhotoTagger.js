@@ -16,7 +16,7 @@ class PhotoTagger extends PureComponent{
     'userSelection': 'Leonardo',
     'scoreCard': {},
     'showScoreModal': false,
-    'showSubmissionModal': true
+    'showSubmissionModal': false
   };
 
   async componentDidMount(){
@@ -79,6 +79,7 @@ class PhotoTagger extends PureComponent{
     if(Object.keys(scoreCard).length > 3){
       // If there are four distinct records, they won. Record their time.
       scoreCard.time = Moment().diff(this.state.startTime, 'seconds');
+      this.setState({'showSubmissionModal': true});
       // Open the modal to allow them to enter their name.
     }
     this.setState({'scoreCard': scoreCard});

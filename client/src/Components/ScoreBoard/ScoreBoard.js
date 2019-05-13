@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import ScoreLine from './ScoreLine/ScoreLine';
+import classes from './ScoreBoard.module.scss';
 
 class ScoreBoard extends PureComponent{
   render(){
@@ -13,7 +14,8 @@ class ScoreBoard extends PureComponent{
     });
 
     return (
-      <div>
+      <div className={classes.ScoreBoard}>
+        <div><span className={classes.title}>High Scores:</span></div>
         {output}
       </div>
     );
