@@ -8,5 +8,6 @@ router.get('/test', scoreController.test);
 router.post('/add', scoreController.validate('addScore'), scoreController.addScore);
 router.get('/:id', scoreController.getScore);
 router.get('/', scoreController.getAllScores);
+router.patch('/:id', scoreController.validate('updateName'), scoreController.updateName);
 
 export default router;
