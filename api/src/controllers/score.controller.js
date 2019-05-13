@@ -3,10 +3,12 @@ import { body, validationResult } from 'express-validator/check';
 
 let ScoreController = {}
 
+// Test command
 ScoreController.test = (req, res) => {
   return res.send('ScoreController');
 };
 
+// Ensures time is in format suitable for use
 ScoreController.validate = (method) => {
   switch (method) {
     case 'addScore':
@@ -17,6 +19,7 @@ ScoreController.validate = (method) => {
   }
 };
 
+// Create
 ScoreController.addScore = (req, res, next) => {
   const name = req.body.name;
   const time = req.body.time;
@@ -35,6 +38,7 @@ ScoreController.addScore = (req, res, next) => {
   })
 };
 
+// Read
 ScoreController.getScore = (req, res, next) => {
   Score.findById(req.params.id, (err, score) => {
     if (err) return next(err);
@@ -42,6 +46,7 @@ ScoreController.getScore = (req, res, next) => {
   })
 }
 
+// Read (all)
 ScoreController.getAllScores = (req, res, next) => {
   Score.find({}, (err, scores) => {
     if (err) return next(err);
