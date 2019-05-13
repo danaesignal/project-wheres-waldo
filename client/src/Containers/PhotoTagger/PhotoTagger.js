@@ -10,13 +10,15 @@ import Modal from '../../HOC/Modal/Modal';
 import Header from '../../Components/Header/Header';
 import Photo from '../../Components/Photo/Photo';
 import ScoreBoard from '../../Components/ScoreBoard/ScoreBoard';
+import NameSubmission from '../../Components/NameSubmission/NameSubmission';
 
 class PhotoTagger extends PureComponent{
   state = {
     'userSelection': 'Leonardo',
     'scoreCard': {},
     'showScoreModal': false,
-    'showSubmissionModal': false
+    'showSubmissionModal': false,
+    'name': ''
   };
 
   async componentDidMount(){
@@ -74,16 +76,49 @@ class PhotoTagger extends PureComponent{
     this.wonGameDetector(scoreCard);
   };
 
-  wonGameDetector = (scoreCard) => {
-    console.log(Object.keys(scoreCard));
+  wonGameDetector = async (scoreCard) => {
     if(Object.keys(scoreCard).length > 3){
+      // If there is already a time recorded on the scorecard, don't record a second one
+      if(scoreCard.time) return
       // If there are four distinct records, they won. Record their time.
       scoreCard.time = Moment().diff(this.state.startTime, 'seconds');
-      this.setState({'showSubmissionModal': true});
       // Open the modal to allow them to enter their name.
+      this.setState({'showSubmissionModal': true});
+      // Post their time as an anonymous record and store their ID on the score card
+      scoreCard = await this.postGameScore(scoreCard);
     }
     this.setState({'scoreCard': scoreCard});
   };
+
+  postGameScore = async (scoreCard) => {
+    const rawResponse = await fetch('http://localhost:4500/score/add', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({time: scoreCard.time})
+    });
+    const content = await rawResponse.json();
+    const id = content['_id'];
+    scoreCard.id = id;
+    return scoreCard;
+  };
+
+  handleNameChange = (event) => {
+    this.setState({name: event.target.value});
+  }
+
+  handleNameSubmission = async () => {
+    return await fetch('http://localhost:4500/score/add', {
+      method: 'PATCH',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({_id: this.state.scoreCard.id, name: this.state.name})
+    });
+  }
 
   toggleScoreModal = () => {
     this.setState({ showScoreModal: !this.state.showScoreModal })
@@ -109,7 +144,11 @@ class PhotoTagger extends PureComponent{
           onlyCloseWithX
           showModal={this.state.showSubmissionModal}
           toggleModal={this.toggleSubmissionModal}>
-          <p>You win!</p>
+          <NameSubmission
+            handleNameSubmission={this.handleNameSubmission}
+            scoreCard={this.state.scoreCard}
+            name={this.state.name}
+            handleNameChange={this.handleNameChange}/>
         </Modal>
         <Header
           nameClick={this.menuClickHandler}
