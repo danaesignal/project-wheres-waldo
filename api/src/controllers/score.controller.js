@@ -1,5 +1,6 @@
 import Score from '../models/score.model.js';
 import { body, validationResult } from 'express-validator/check';
+import He from 'he'
 
 let ScoreController = {}
 
@@ -54,6 +55,9 @@ ScoreController.getScore = (req, res, next) => {
 ScoreController.getAllScores = (req, res, next) => {
   Score.find({}, (err, scores) => {
     if (err) return next(err);
+    scores.forEach(score => {
+      score.name = He.decode(score.name);
+    })
     res.send(scores);
   })
 };
@@ -64,7 +68,7 @@ ScoreController.updateName = (req, res, next) => {
     if (err) return next(err);
     score.name = req.body.name;
     const errors = validationResult(req);
-    
+
     score.save(function (err) {
       if (!errors.isEmpty()) return res.status(422).json({ errors: errors.array() });
       if (err) return next(err);
