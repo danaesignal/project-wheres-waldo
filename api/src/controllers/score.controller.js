@@ -34,7 +34,7 @@ ScoreController.addScore = (req, res, next) => {
   score.save(function (err) {
     if (!errors.isEmpty()) return res.status(422).json({ errors: errors.array() });
     if (err) return next(err);
-    res.send('Score recorded');
+    res.send(score);
   })
 };
 
