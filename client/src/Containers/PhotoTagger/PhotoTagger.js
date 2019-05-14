@@ -1,7 +1,7 @@
 // Main container for app
-// Will: contain state, query API and interpret results, define functions for
-// lower components to use
-// Won't: display anything on its own
+// Contains state, queries API and interprets results, defines functions for
+// subsequent components to use
+// Only displays other components
 
 import React, { PureComponent } from 'react';
 import classes from './PhotoTagger.module.scss';
@@ -110,7 +110,6 @@ class PhotoTagger extends PureComponent{
   }
 
   handleNameSubmission = async () => {
-    console.log('Yerp');
     return await fetch(`http://localhost:4500/score/${this.state.scoreCard.id}`, {
       method: 'PATCH',
       headers: {

@@ -1,3 +1,5 @@
+// Individual entries on the high score list
+
 import React, { PureComponent } from 'react';
 
 class ScoreLine extends PureComponent{
@@ -8,7 +10,7 @@ class ScoreLine extends PureComponent{
   render(){
     return (
       <div>
-        {unescape(this.props.score.name)}, {this.props.score.time} seconds.
+        {this.props.score.name}, {this.props.score.time} seconds.
       </div>
     );
   }

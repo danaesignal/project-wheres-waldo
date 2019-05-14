@@ -1,3 +1,6 @@
+// Displayed when the user finishes the game, prompting them to enter their names
+// for the high score list. Score is recorded regardless of whether they submit a name.
+
 import React, { PureComponent } from 'react';
 import classes from './NameSubmission.module.scss';
 

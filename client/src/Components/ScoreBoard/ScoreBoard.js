@@ -1,3 +1,6 @@
+// Displays the high score list
+// Does not update dynamically
+
 import React, { PureComponent } from 'react';
 import ScoreLine from './ScoreLine/ScoreLine';
 import classes from './ScoreBoard.module.scss';

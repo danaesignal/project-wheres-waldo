@@ -1,41 +1,25 @@
-// Contains the list of names being tagged, with text colors differentiating
-// which people have been correctly tagged
+// Contains the list of names being tagged; text color differentiates people who
+// have been correctly tagged (see: Name subcomponent)
+
 import React, { PureComponent } from 'react';
 import classes from './NameBar.module.scss';
 import Name from './Name/Name';
 
 class NameBar extends PureComponent{
-  state = {
-
-  };
-
   render(){
+    let names = ["Leonardo", "Donatello", "Raphael", "Michaelangelo"];
+    let nameList = names.map(name => {
+      return (<Name
+        content={name}
+        click={this.props.click}
+        active={this.props.userSelection === name}
+        complete={this.props.scoreCard.includes(`${name}`)}
+        key={name}
+      />)
+    })
     return (
       <div className={classes.NameBar}>
-        <Name
-          content="Leonardo"
-          click={this.props.click}
-          active={this.props.userSelection === "Leonardo"}
-          complete={this.props.scoreCard.includes("Leonardo")}
-        />
-        <Name
-          content="Donatello"
-          click={this.props.click}
-          active={this.props.userSelection === "Donatello"}
-          complete={this.props.scoreCard.includes("Donatello")}
-        />
-        <Name
-          content="Michaelangelo"
-          click={this.props.click}
-          active={this.props.userSelection === "Michaelangelo"}
-          complete={this.props.scoreCard.includes("Michaelangelo")}
-        />
-        <Name
-          content="Raphael"
-          click={this.props.click}
-          active={this.props.userSelection === "Raphael"}
-          complete={this.props.scoreCard.includes("Raphael")}
-        />
+        {nameList}
       </div>
     );
   }
