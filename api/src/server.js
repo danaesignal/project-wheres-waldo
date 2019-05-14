@@ -10,6 +10,8 @@ app.use(cors());
 
 const app = express();
 
+app.use(cors());
+
 dotenv.config();
 
 // Mongoose for MongoDB connection

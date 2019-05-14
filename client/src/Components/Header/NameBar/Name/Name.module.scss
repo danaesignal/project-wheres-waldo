@@ -1,0 +1,15 @@
+.Name {
+  padding-left: 10px;
+  padding-right: 10px;
+  span {
+    cursor: pointer;
+  }
+  span.active{
+    color: lighten(hsla(48, 60%, 69%, 1), 5%);
+  }
+
+  span.complete{
+    color: lighten(green, 5%);
+    cursor: default;
+  }
+}
