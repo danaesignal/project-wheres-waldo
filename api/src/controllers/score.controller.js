@@ -1,5 +1,6 @@
 import Score from '../models/score.model.js';
 import { body, validationResult } from 'express-validator/check';
+import He from 'he'
 
 let ScoreController = {}
 
@@ -15,6 +16,10 @@ ScoreController.validate = (method) => {
       return [
         body('name').trim().escape(),
         body('time', 'Time must be numeric (in seconds)').isNumeric().trim().escape()
+      ]
+    case 'updateName':
+      return [
+        body('name').trim().escape(),
       ]
   }
 };
@@ -34,7 +39,7 @@ ScoreController.addScore = (req, res, next) => {
   score.save(function (err) {
     if (!errors.isEmpty()) return res.status(422).json({ errors: errors.array() });
     if (err) return next(err);
-    res.send('Score recorded');
+    res.send(score);
   })
 };
 
@@ -50,8 +55,26 @@ ScoreController.getScore = (req, res, next) => {
 ScoreController.getAllScores = (req, res, next) => {
   Score.find({}, (err, scores) => {
     if (err) return next(err);
+    scores.forEach(score => {
+      score.name = He.decode(score.name);
+    })
     res.send(scores);
   })
 };
+
+// Update
+ScoreController.updateName = (req, res, next) => {
+  Score.findById(req.params.id, (err, score) => {
+    if (err) return next(err);
+    score.name = req.body.name;
+    const errors = validationResult(req);
+
+    score.save(function (err) {
+      if (!errors.isEmpty()) return res.status(422).json({ errors: errors.array() });
+      if (err) return next(err);
+      res.send(score);
+    })
+  })
+}
 
 export default ScoreController;
