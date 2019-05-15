@@ -6,9 +6,9 @@ import Score from './routes/score.route';
 import Target from './routes/target.route';
 import cors from 'cors'
 
-app.use(cors());
-
 const app = express();
+
+app.use(cors());
 
 dotenv.config();
 
