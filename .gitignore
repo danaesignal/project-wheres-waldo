@@ -1,4 +1,6 @@
 api/node_modules
-api/client/node_modules
+api/build
+client/node_modules
+api/build/*
 .DS_Store
 .env
