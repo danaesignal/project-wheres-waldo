@@ -1,6 +1,10 @@
 import Score from '../models/score.model.js';
 import { body, validationResult } from 'express-validator/check';
-import He from 'he'
+import He from 'he';
+import dotenv from 'dotenv';
+import { Base64 } from 'js-base64'
+
+dotenv.config();
 
 let ScoreController = {}
 
@@ -23,6 +27,20 @@ ScoreController.validate = (method) => {
       ]
   }
 };
+
+// Authenticate
+ScoreController.authenticate = (req, res, next) => {
+  let authentication = `Basic ${Base64.encode(process.env.API_KEY)}`;
+  try {
+    if(req.headers.authorization === authentication){
+      next();
+    } else {
+      res.status(511).json({ errors: "Valid API Key required" });
+    }
+  } catch (e) {
+    res.send(e)
+  }
+}
 
 // Create
 ScoreController.addScore = (req, res, next) => {
