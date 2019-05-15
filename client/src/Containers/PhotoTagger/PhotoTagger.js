@@ -4,6 +4,7 @@
 // Only displays other components
 
 import React, { PureComponent } from 'react';
+import { Base64 } from 'js-base64';
 import classes from './PhotoTagger.module.scss';
 import Moment from 'moment';
 import Modal from '../../HOC/Modal/Modal';
@@ -95,7 +96,8 @@ class PhotoTagger extends PureComponent{
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'authorization': 'Basic ' + Base64.encode(process.env.REACT_APP_API_KEY)
       },
       body: JSON.stringify({time: scoreCard.time})
     });
@@ -114,7 +116,8 @@ class PhotoTagger extends PureComponent{
       method: 'PATCH',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'authorization': 'Basic ' + Base64.encode(process.env.REACT_APP_API_KEY)
       },
       body: JSON.stringify({name: this.state.name})
     });
