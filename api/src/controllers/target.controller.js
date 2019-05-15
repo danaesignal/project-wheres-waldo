@@ -1,4 +1,8 @@
 import Target from '../models/target.model.js';
+import dotenv from 'dotenv';
+import { Base64 } from 'js-base64'
+
+dotenv.config();
 
 let TargetController = {}
 
@@ -6,6 +10,19 @@ let TargetController = {}
 TargetController.test = (req, res) => {
   return res.send('TargetController');
 };
+
+TargetController.authenticate = (req, res, next) => {
+  let authentication = `Basic ${Base64.encode(process.env.API_KEY)}`;
+  try {
+    if(req.headers.authorization === authentication){
+      next();
+    } else {
+      res.status(511).json({ errors: "Valid API Key required" });
+    }
+  } catch (e) {
+    res.send(e)
+  }
+}
 
 // Read
 TargetController.getTarget = (req, res) => {
