@@ -16,6 +16,8 @@ var _cors = _interopRequireDefault(require("cors"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
+var path = require("path");
+
 var app = (0, _express["default"])();
 app.use((0, _cors["default"])());
 
@@ -33,13 +35,15 @@ app.use(_express["default"].json());
 app.use(_bodyParser["default"].json());
 app.use(_bodyParser["default"].urlencoded({
   extended: false
-})); // Real basic landing page
+})); // Facilitates React client
 
-app.get('/', function (req, res) {
-  return res.status(200).send('Okay');
-}); // Routers for Score and Target end points
+app.use(_express["default"]["static"](path.join(__dirname, "../client", "build"))); // Routers for Score and Target end points
 
 app.use('/score', _score["default"]);
-app.use('/target', _target["default"]);
+app.use('/target', _target["default"]); // Serves React client
+
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
+});
 app.listen(4500);
 console.log('API running on port 4500.');

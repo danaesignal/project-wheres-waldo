@@ -6,6 +6,7 @@ import Score from './routes/score.route';
 import Target from './routes/target.route';
 import cors from 'cors'
 
+const path = require("path")
 const app = express();
 
 app.use(cors());
@@ -24,14 +25,17 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-// Real basic landing page
-app.get('/', (req, res) => {
-  return res.status(200).send('Okay');
-})
+// Facilitates React client
+app.use(express.static(path.join(__dirname, "../client", "build")))
 
 // Routers for Score and Target end points
 app.use('/score', Score);
 app.use('/target', Target);
+
+// Serves React client
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
+});
 
 app.listen(4500)
 
