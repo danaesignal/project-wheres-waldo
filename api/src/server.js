@@ -8,6 +8,7 @@ import cors from 'cors'
 
 const path = require("path")
 const app = express();
+const port = process.env.PORT || 4500;
 
 app.use(cors());
 
@@ -37,6 +38,6 @@ app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
 });
 
-app.listen(4500)
+app.listen(port)
 
-console.log('API running on port 4500.');
+console.log(`Server running on port ${port}.`);
