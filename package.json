@@ -11,18 +11,19 @@
     "heroku-postbuild": "cd client && rm -rf node_modules && npm install --only=dev && npm install && npm run build"
   },
   "engines": {
-    "node": "10.15.3"
+    "node": "10.15.3",
+    "npm": "6.9.0"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "eslint": "^5.16.0"
+  },
+  "dependencies": {
     "@babel/cli": "^7.4.3",
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "babel-watch": "^7.0.0",
-    "eslint": "^5.16.0"
-  },
-  "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "dotenv": "^7.0.0",
