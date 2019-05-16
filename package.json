@@ -8,7 +8,7 @@
     "start": "node build/server.js",
     "build": "npm install && npx babel src --out-dir build",
     "dev-start": "babel-watch src/server.js",
-    "heroku-postbuild": "cd client && rm -rf node_modules && npm install --only=dev && npm install && npm run build"
+    "heroku-postbuild": "rm -rf node_modules && npm run build && cd client && rm -rf node_modules && npm install --only=dev && npm install && npm run build"
   },
   "engines": {
     "node": "10.15.3",
