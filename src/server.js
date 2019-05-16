@@ -30,6 +30,10 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use('/score', Score);
 app.use('/target', Target);
 
+app.get('/', (req, res) => {
+  res.send("Yeah this is hooked up.")
+});
+
 // // Facilitates React client
 // app.use(express.static(path.join(__dirname, "../client", "build")))
 //
