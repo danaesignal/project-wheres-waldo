@@ -23,11 +23,11 @@ class PhotoTagger extends PureComponent{
   };
 
   async componentDidMount(){
-    const turtleResponse = await fetch(`https://0.0.0.0:4500/target/${this.state.userSelection}`);
+    const turtleResponse = await fetch(`https://localhost:4500/target/${this.state.userSelection}`);
     const turtleJson = await turtleResponse.json();
     const turtleData = {...turtleJson[0]};
 
-    const scoreResponse = await fetch(`https://0.0.0.0:4500/score/`);
+    const scoreResponse = await fetch(`https://localhost:4500/score/`);
     const scoreJson = await scoreResponse.json();
     const scoreData = [...scoreJson];
 
@@ -58,7 +58,7 @@ class PhotoTagger extends PureComponent{
   menuClickHandler = async (turtle) => {
     if(this.state.scoreCard[turtle]) return;
 
-    const turtleResponse = await fetch(`https://0.0.0.0:4500/target/${turtle}`);
+    const turtleResponse = await fetch(`https://localhost:4500/target/${turtle}`);
     const turtleJson = await turtleResponse.json();
     const turtleData = {...turtleJson[0]};
 
@@ -92,7 +92,7 @@ class PhotoTagger extends PureComponent{
   };
 
   postGameScore = async (scoreCard) => {
-    const rawResponse = await fetch('https://0.0.0.0:4500/score/add', {
+    const rawResponse = await fetch('https://localhost:4500/score/add', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -112,7 +112,7 @@ class PhotoTagger extends PureComponent{
   }
 
   handleNameSubmission = async () => {
-    return await fetch(`https://0.0.0.0:4500/score/${this.state.scoreCard.id}`, {
+    return await fetch(`https://localhost:4500/score/${this.state.scoreCard.id}`, {
       method: 'PATCH',
       headers: {
         'Accept': 'application/json',
