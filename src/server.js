@@ -8,6 +8,7 @@ import cors from 'cors'
 
 const path = require("path")
 const app = express();
+const port = process.env.PORT || 4500;
 
 app.use(cors());
 
@@ -25,18 +26,18 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-// Facilitates React client
-app.use(express.static(path.join(__dirname, "../client", "build")))
-
 // Routers for Score and Target end points
 app.use('/score', Score);
 app.use('/target', Target);
+
+// Facilitates React client
+app.use(express.static(path.join(__dirname, "../client", "build")))
 
 // Serves React client
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
 });
 
-app.listen(4500)
+app.listen(port)
 
-console.log('API running on port 4500.');
+console.log(`Server running on port ${port}.`);
