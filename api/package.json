@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node build/server.js",
-    "build": "npx babel src --out-dir build",
+    "build": "npm install && npx babel src --out-dir build",
     "dev-start": "babel-watch src/server.js",
     "heroku-postbuild": "cd client && rm -rf node_modules && npm install --only=dev && npm install && npm run build"
   },

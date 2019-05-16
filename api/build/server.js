@@ -19,6 +19,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 var path = require("path");
 
 var app = (0, _express["default"])();
+var port = process.env.PORT || 4500;
 app.use((0, _cors["default"])());
 
 _dotenv["default"].config(); // Mongoose for MongoDB connection
@@ -45,5 +46,5 @@ app.use('/target', _target["default"]); // Serves React client
 app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
 });
-app.listen(4500);
-console.log('API running on port 4500.');
+app.listen(port);
+console.log("Server running on port ".concat(port, "."));
