@@ -30,13 +30,13 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use('/score', Score);
 app.use('/target', Target);
 
-// Facilitates React client
-app.use(express.static(path.join(__dirname, "../client", "build")))
-
-// Serves React client
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
-});
+// // Facilitates React client
+// app.use(express.static(path.join(__dirname, "../client", "build")))
+//
+// // Serves React client
+// app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "../client", "build", "index.html"));
+// });
 
 app.listen(port)
 
