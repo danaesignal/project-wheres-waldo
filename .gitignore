@@ -1,5 +1,5 @@
-api/node_modules
-api/build
+node_modules
+build
 client/node_modules
 api/build/*
 .DS_Store

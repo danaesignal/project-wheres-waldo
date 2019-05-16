@@ -26,12 +26,12 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-// Facilitates React client
-app.use(express.static(path.join(__dirname, "../client", "build")))
-
 // Routers for Score and Target end points
 app.use('/score', Score);
 app.use('/target', Target);
+
+// Facilitates React client
+app.use(express.static(path.join(__dirname, "../client", "build")))
 
 // Serves React client
 app.get("*", (req, res) => {
